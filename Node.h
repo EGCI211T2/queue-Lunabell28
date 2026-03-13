@@ -15,7 +15,7 @@ typedef NODE* NodePtr;
 
 NODE::NODE(int x){
     data=x;
-    nextPtr=NULL;
+    nextPtr=nullptr;
    
 }
 NODE* NODE::get_next(){
@@ -34,8 +34,6 @@ void NODE::set_next(NODE *t){
 
 }
 NODE::~NODE(){
-     cout<<" "<<data<<endl;
-
 }
 
 

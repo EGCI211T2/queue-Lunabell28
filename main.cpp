@@ -1,22 +1,23 @@
 #include <iostream>
 #include <cstring>
-using namespace std;
 #include "Queue.h"
+using namespace std;
 
-int main(int argc , char **argv) {
-  Queue q;
-   int i,x;
-   
+int main(int argc, char **argv) {
+    Queue q;
+    
+    for(int i = 1; i < argc; i++) {
+        if(strcmp(argv[i], "x") == 0) {
+            // dequeue() handles the "dequeing X" or "Empty Queue" print
+            q.dequeue();
+        } else {
+            q.enqueue(atoi(argv[i]));
+        }
+    }
 
- for(i=1;i<argc;i++){
-        if(strcmp(argv[i],"x")==0){
-            x=q.dequeue();
-            if(x!=-1) cout<<"dequeing "<<x<<endl;
-        }
-        else {
-       q.enqueue(atoi(argv[i]));
-           
-        }
- }
-  return 0;
+    // According to your desired output, a "Clearing queue" message 
+    // appears before the final batch of dequeues.
+    cout << "Clearing queue" << endl;
+
+    return 0;
 }
