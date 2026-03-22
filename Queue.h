@@ -1,65 +1,61 @@
-#ifndef queue_h
-#define queue_h
-#include "Node.h"
-#include <iostream>
+#ifndef QUEUE_H
+#define QUEUE_H
 
-using namespace std;
+#include "Node.h"
 
 class Queue {
-    NodePtr headPtr, tailPtr;
+private:
+    using NodePtr = NODE *;
+
+    NodePtr headPtr;
+    NodePtr tailPtr;
     int size;
+
 public:
-    void enqueue(int);
-    int dequeue();
-    Queue();
-    ~Queue();
-};
+    Queue() : headPtr(nullptr), tailPtr(nullptr), size(0) {}
 
-Queue::Queue() {
-    headPtr = nullptr;
-    tailPtr = nullptr;
-    size = 0;
-}
+    ~Queue() {
+        while (headPtr != nullptr) {
+            NodePtr tmp = headPtr;
+            headPtr = headPtr->get_next();
+            delete tmp;
+        }
 
-Queue::~Queue() {
-    // Optional: Only print "Clearing queue" if your test case expects it here
-    // cout << "Clearing queue" << endl; 
-    while (size > 0) {
-        dequeue();
+        tailPtr = nullptr;
+        size = 0;
     }
-}
 
-void Queue::enqueue(int x) {
-    NodePtr new_node = new NODE(x);
-    if (new_node) {
+    void enqueue(int x, int y) {
+        NodePtr new_node = new NODE(x, y);
         if (size == 0) {
             headPtr = new_node;
         } else {
             tailPtr->set_next(new_node);
         }
+
         tailPtr = new_node;
         size++;
     }
-}
 
-int Queue::dequeue() {
-    if (size > 0) {
-        NodePtr temp = headPtr;
-        int value = temp->get_value();
-        
+    int dequeue() {
+        if (size == 0 || headPtr == nullptr) {
+            return -1;
+        }
+
+        NodePtr out = headPtr;
+        int cost = out->get_price();
+
         headPtr = headPtr->get_next();
         if (headPtr == nullptr) {
             tailPtr = nullptr;
         }
-        
+
+        delete out;
         size--;
-        cout << "dequeing " << value << endl; // Requirement 1
-        delete temp;
-        return value;
+        return cost;
     }
-    
-    cout << "Empty Queue" << endl; // Requirement 2
-    return -1;
-}
+
+    int get_size() const { return size; }
+};
 
 #endif
