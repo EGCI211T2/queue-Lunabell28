@@ -14,17 +14,13 @@ public:
     Queue() : headPtr(nullptr), tailPtr(nullptr), size(0) {}
 
     ~Queue() {
-        int remaining = size; // Store count before clearing
-        while (size > 0) {
-           
+        while (headPtr != nullptr) {
             NodePtr tmp = headPtr;
             headPtr = headPtr->get_next();
-            delete tmp; // This prints "Removing [Food]"
-            size--;
+            delete tmp;
         }
         tailPtr = nullptr;
-        // The very last output of the program
-        cout << "The shop is closed. There are " << remaining << " order(s) left." << endl;
+        size = 0;
     }
 
     void enqueue(int x, int y) {
