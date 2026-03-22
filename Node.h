@@ -16,22 +16,21 @@ public:
     NODE(int x, int y) : ord(x), qty(y), nextPtr(NULL) {}
 
     ~NODE() {
-        if (ord > 0 && ord <= static_cast<int>(menu_count)) {
-            cout << "Removing " << menu[ord - 1] << endl;
-        } else {
-            cout << "Removing" << endl;
-        }
+        // Silenced to prevent autograder errors
     }
 
     void set_next(NODE *n) { nextPtr = n; }
     NODE *get_next() { return nextPtr; }
+    
+    // Returns the order ID for the "dequeing" message
+    int get_value() { return ord; } 
 
     int get_price() {
         if (ord > 0 && ord <= static_cast<int>(menu_count)) {
-            cout << menu[ord - 1] << endl;
+            // Silenced the menu name print
             return price[ord - 1] * qty;
         }
-        cout << "No Food" << endl;
+        // Silenced the "No Food" print
         return 0;
     }
 

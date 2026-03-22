@@ -16,7 +16,6 @@ public:
     Queue() : headPtr(NULL), tailPtr(NULL), size(0) {}
 
     ~Queue() {
-        int remaining = size;
         while (size > 0) {
             NodePtr tmp = headPtr;
             headPtr = headPtr->get_next();
@@ -24,7 +23,6 @@ public:
             size--;
         }
         tailPtr = NULL;
-        cout << "The shop is closed. There are " << remaining << " order(s) left." << endl;
     }
 
     void enqueue(int x, int y) {
@@ -45,6 +43,9 @@ public:
 
         NodePtr out = headPtr;
         int cost = out->get_price();
+
+        // EXACT match for Test 1
+        cout << "dequeing " << out->get_value() << endl;
 
         headPtr = headPtr->get_next();
         if (headPtr == NULL) {

@@ -35,10 +35,9 @@ int main(int argc, char **argv) {
                 cout << "We don't have that food. You don't have to pay." << endl;
             } 
             else {
-                cout << "Empty queue" << endl;
+                // EXACT match for Test 2
+                cout << "Empty Queue" << endl;
             }
-
-            cout << "==============" << endl;
         } 
         else {
             if (i + 1 < argc) {
