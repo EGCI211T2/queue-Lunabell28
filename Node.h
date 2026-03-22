@@ -13,16 +13,15 @@ private:
     NODE *nextPtr;
 
 public:
-    NODE(int x, int y) : ord(x), qty(y), nextPtr(nullptr) {}
+    NODE(int x, int y) : ord(x), qty(y), nextPtr(NULL) {}
 
     ~NODE() {
-    if (ord > 0 && ord <= static_cast<int>(menu_count)) {
-        cout << "Removing " << menu[ord - 1] << endl;
-    } else {
-        
-        cout << "Removing" << endl; 
+        if (ord > 0 && ord <= static_cast<int>(menu_count)) {
+            cout << "Removing " << menu[ord - 1] << endl;
+        } else {
+            cout << "Removing" << endl;
+        }
     }
-}
 
     void set_next(NODE *n) { nextPtr = n; }
     NODE *get_next() { return nextPtr; }
@@ -32,7 +31,6 @@ public:
             cout << menu[ord - 1] << endl;
             return price[ord - 1] * qty;
         }
-
         cout << "No Food" << endl;
         return 0;
     }
@@ -45,6 +43,8 @@ private:
 
 const string NODE::menu[] = {"Burger", "Pizza", "Fried Chicken", "French Fries", "Coke"};
 const int NODE::price[] = {60, 80, 120, 50, 30};
-const size_t NODE::menu_count = sizeof(NODE::price) / sizeof(NODE::price[0]);
+const size_t NODE::menu_count = 5; 
+
+typedef NODE* NodePtr;
 
 #endif
