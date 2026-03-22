@@ -6,7 +6,6 @@
 class Queue {
 private:
     using NodePtr = NODE *;
-
     NodePtr headPtr;
     NodePtr tailPtr;
     int size;
@@ -15,14 +14,17 @@ public:
     Queue() : headPtr(nullptr), tailPtr(nullptr), size(0) {}
 
     ~Queue() {
-        while (headPtr != nullptr) {
+        int remaining = size; // Store count before clearing
+        while (size > 0) {
+           
             NodePtr tmp = headPtr;
             headPtr = headPtr->get_next();
-            delete tmp;
+            delete tmp; // This prints "Removing [Food]"
+            size--;
         }
-
         tailPtr = nullptr;
-        size = 0;
+        // The very last output of the program
+        cout << "The shop is closed. There are " << remaining << " order(s) left." << endl;
     }
 
     void enqueue(int x, int y) {
@@ -32,14 +34,13 @@ public:
         } else {
             tailPtr->set_next(new_node);
         }
-
         tailPtr = new_node;
         size++;
     }
 
     int dequeue() {
         if (size == 0 || headPtr == nullptr) {
-            return -1;
+            return -1; // Indicates empty queue
         }
 
         NodePtr out = headPtr;
@@ -50,7 +51,7 @@ public:
             tailPtr = nullptr;
         }
 
-        delete out;
+        delete out; 
         size--;
         return cost;
     }

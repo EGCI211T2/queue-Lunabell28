@@ -16,12 +16,13 @@ public:
     NODE(int x, int y) : ord(x), qty(y), nextPtr(nullptr) {}
 
     ~NODE() {
-        if (ord > 0 && ord <= static_cast<int>(menu_count)) {
-            cout << "Removing " << menu[ord - 1] << endl;
-        } else {
-            cout << "Removing" << endl;
-        }
+    if (ord > 0 && ord <= static_cast<int>(menu_count)) {
+        cout << "Removing " << menu[ord - 1] << endl;
+    } else {
+        
+        cout << "Removing" << endl; 
     }
+}
 
     void set_next(NODE *n) { nextPtr = n; }
     NODE *get_next() { return nextPtr; }
