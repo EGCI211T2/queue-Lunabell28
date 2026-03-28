@@ -12,37 +12,36 @@ private:
     int qty;
     NODE *nextPtr;
 
+    static const string menu[];
+    static const int price[];
+    static const int menu_count = 3; 
+
 public:
     NODE(int x, int y) : ord(x), qty(y), nextPtr(NULL) {}
-
-    ~NODE() {
-        // Silenced to prevent autograder errors
-    }
+    ~NODE() {}
 
     void set_next(NODE *n) { nextPtr = n; }
     NODE *get_next() { return nextPtr; }
-    
-    // Returns the order ID for the "dequeing" message
     int get_value() { return ord; } 
 
-    int get_price() {
-        if (ord > 0 && ord <= static_cast<int>(menu_count)) {
-            // Silenced the menu name print
-            return price[ord - 1] * qty;
+    // New helper to get the food name
+    string get_name() {
+        if (ord >= 1 && ord <= menu_count) {
+            return menu[ord - 1];
         }
-        // Silenced the "No Food" print
-        return 0;
+        return "No Food";
     }
 
-private:
-    static const string menu[];
-    static const int price[];
-    static const size_t menu_count;
+    int get_price() {
+        if (ord >= 1 && ord <= menu_count) {
+            return price[ord - 1] * qty;
+        }
+        return 0;
+    }
 };
 
-const string NODE::menu[] = {"Burger", "Pizza", "Fried Chicken", "French Fries", "Coke"};
-const int NODE::price[] = {60, 80, 120, 50, 30};
-const size_t NODE::menu_count = 5; 
+const string NODE::menu[] = {"Ramen", "Somtum", "Fried Chicken"};
+const int NODE::price[] = {100, 20, 50};
 
 typedef NODE* NodePtr;
 

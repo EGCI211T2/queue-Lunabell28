@@ -15,14 +15,11 @@ private:
 public:
     Queue() : headPtr(NULL), tailPtr(NULL), size(0) {}
 
+    // Updated destructor to print leftover items
     ~Queue() {
         while (size > 0) {
-            NodePtr tmp = headPtr;
-            headPtr = headPtr->get_next();
-            delete tmp;
-            size--;
+            dequeue(); 
         }
-        tailPtr = NULL;
     }
 
     void enqueue(int x, int y) {
@@ -43,9 +40,15 @@ public:
 
         NodePtr out = headPtr;
         int cost = out->get_price();
+        string name = out->get_name();
 
-        // EXACT match for Test 1
-        cout << "dequeing " << out->get_value() << endl;
+        // Prints the food name and "Removing..."
+        cout << name << endl;
+        if (name != "No Food") {
+            cout << "Removing " << name << endl;
+        } else {
+            cout << "Removing" << endl;
+        }
 
         headPtr = headPtr->get_next();
         if (headPtr == NULL) {
