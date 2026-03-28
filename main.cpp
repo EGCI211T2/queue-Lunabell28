@@ -12,7 +12,7 @@ int main(int argc, char **argv) {
         if (strcmp(argv[i], "x") == 0) {
             int price = q.dequeue();
 
-            // Handle the Empty Queue case first to pass Test 2
+           
             if (price == -1) {
                 cout << "Empty Queue" << endl;
             } 
@@ -40,7 +40,7 @@ int main(int argc, char **argv) {
             }
         } 
         else {
-            // Enqueue logic: takes the ID and the next argument as Quantity
+          
             if (i + 1 < argc) {
                 int order = atoi(argv[i]);
                 int qty = atoi(argv[i + 1]);
