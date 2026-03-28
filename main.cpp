@@ -12,14 +12,22 @@ int main(int argc, char **argv) {
         if (strcmp(argv[i], "x") == 0) {
             int price = q.dequeue();
 
-            if (price > 0) {
+            // Handle the Empty Queue case first to pass Test 2
+            if (price == -1) {
+                cout << "Empty Queue" << endl;
+            } 
+            else if (price == 0) {
+                cout << "We don't have that food. You don't have to pay." << endl;
+                cout << "===============================" << endl;
+            } 
+            else if (price > 0) {
                 int cash = 0;
                 int total_paid = 0;
                 cout << "You have to pay " << price << endl;
 
                 while (total_paid < price) {
                     cout << "Cash:";
-                    cin >> cash;
+                    if (!(cin >> cash)) break; 
                     total_paid += cash;
                 }
 
@@ -29,24 +37,20 @@ int main(int argc, char **argv) {
                     cout << "Here is your " << (total_paid - price) << " change." << endl;
                 }
                 cout << "===============================" << endl;
-            } 
-            else if (price == 0) {
-                cout << "We don't have that food. You don't have to pay." << endl;
-                cout << "===============================" << endl;
-            } 
+            }
         } 
         else {
-            // Check if there's a quantity following the order ID
-            if (i + 1 < argc && strcmp(argv[i+1], "x") != 0) {
+            // Enqueue logic: takes the ID and the next argument as Quantity
+            if (i + 1 < argc) {
                 int order = atoi(argv[i]);
                 int qty = atoi(argv[i + 1]);
                 q.enqueue(order, qty);
-                i++; 
+                i++; // Skip the quantity argument in the next loop iteration
             }
         }
     }
 
-    // This part triggers the final sequence in your screenshot
+    // Final summary for leftover orders
     int leftover = q.get_size();
     if (leftover > 0) {
         cout << "The shop is closed. There are " << leftover << " left." << endl;
